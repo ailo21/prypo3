@@ -1,0 +1,82 @@
+﻿@model prypo3.DataModel.Fant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Title</h2>
+
+<div>
+    <h4>Fant</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Proof)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proof)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Publish)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Publish)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
