@@ -48,6 +48,7 @@ namespace prypo3.Controllers
         }
 
         // GET: Fant/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -55,6 +56,7 @@ namespace prypo3.Controllers
 
         // POST: Fant/Create
         [HttpPost]
+        [Authorize]
         public ActionResult Create(Fant collection)
         {
             try
@@ -81,6 +83,7 @@ namespace prypo3.Controllers
         }
 
         // GET: Fant/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
             return View();
@@ -88,6 +91,7 @@ namespace prypo3.Controllers
 
         // POST: Fant/Edit/5
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -103,6 +107,7 @@ namespace prypo3.Controllers
         }
 
         // GET: Fant/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
             return View();
@@ -110,6 +115,7 @@ namespace prypo3.Controllers
 
         // POST: Fant/Delete/5
         [HttpPost]
+        [Authorize]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
