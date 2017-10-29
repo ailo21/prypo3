@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201710151841101_start2.Designer.cs">
       <DependentUpon>201710151841101_start2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710291033281_DataMigration2.cs" />
+    <Compile Include="Migrations\201710291033281_DataMigration2.Designer.cs">
+      <DependentUpon>201710291033281_DataMigration2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -290,6 +294,10 @@
     <Content Include="Views\Fant\Index.cshtml" />
     <Content Include="Views\Fant\Details.cshtml" />
     <Content Include="Views\Fant\Create.cshtml" />
+    <Content Include="Views\Manage\Roles.cshtml" />
+    <Content Include="Views\Manage\CreateRole.cshtml" />
+    <Content Include="Views\Manage\AddRoleToUser.cshtml" />
+    <Content Include="Views\Fant\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -317,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710151841101_start2.resx">
       <DependentUpon>201710151841101_start2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710291033281_DataMigration2.resx">
+      <DependentUpon>201710291033281_DataMigration2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

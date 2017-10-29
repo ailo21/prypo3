@@ -16,14 +16,24 @@ namespace prypo3.Controllers
         {
             using (LibraryContext db = new LibraryContext())
             {
-                //Fant item = new Fant();                
+                #region //new fant gener
+                //Fant item = new Fant();
                 //item.Title = "Title Fant";
                 //item.Text = "Lorem ipsum...";
+                //item.Author = User.Identity.GetUserId();
                 //item.Price = 2500;
                 //db.Fants.Add(item);
-                //db.SaveChanges();
-
-                return View(db.Fants.ToList());
+                //db.SaveChanges(); 
+                #endregion
+                if (User.IsInRole("admin"))
+                {
+                    return View(db.Fants.ToList());
+                }
+                else
+                {
+                    return View(db.Fants.Where(w=>w.Publish==true).ToList());
+                }
+                
             }
             
         }
@@ -33,7 +43,6 @@ namespace prypo3.Controllers
         {
             using (LibraryContext db = new LibraryContext())
             {
-
                 if (id == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -43,6 +52,7 @@ namespace prypo3.Controllers
                 {
                     return HttpNotFound();
                 }
+                ViewBag.Edit = (data.Author == User.Identity.GetUserId() || User.IsInRole("admin")) ? true : false;
                 return View(data);
             }                
         }
@@ -86,18 +96,36 @@ namespace prypo3.Controllers
         [Authorize]
         public ActionResult Edit(int id)
         {
-            return View();
+            using (LibraryContext db = new LibraryContext())
+            {
+                Fant data = db.Fants.Find(id);
+                
+                if (!(data != null || data.Author== User.Identity.GetUserId() || User.IsInRole("admin")))
+                {
+                    return HttpNotFound();
+                }
+                return View(data);
+            }            
         }
 
         // POST: Fant/Edit/5
         [HttpPost]
         [Authorize]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Fant model)
         {
             try
             {
-                // TODO: Add update logic here
-
+                if (ModelState.IsValid)
+                {
+                    using (LibraryContext db = new LibraryContext())
+                    {
+                        var user = db.Fants.Single(u => u.Id == id);
+                        user.Title = model.Title;
+                        user.Publish = model.Publish;
+                        db.SaveChanges();
+                    }
+                }
                 return RedirectToAction("Index");
             }
             catch

@@ -146,3 +146,4 @@ D:\prypo2\prypo3\prypo3\obj\Debug\prypo3.Migrations.InitialCreate.resources
 D:\prypo2\prypo3\prypo3\obj\Debug\prypo3.csproj.GenerateResource.Cache
 D:\prypo2\prypo3\prypo3\obj\Debug\prypo3.Migrations.start.resources
 D:\prypo2\prypo3\prypo3\obj\Debug\prypo3.Migrations.start2.resources
+D:\prypo2\prypo3\prypo3\obj\Debug\prypo3.Migrations.DataMigration2.resources

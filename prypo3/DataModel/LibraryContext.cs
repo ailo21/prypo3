@@ -18,6 +18,8 @@
         }
         public DbSet<Fant> Fants { get; set; }
 
+        public System.Data.Entity.DbSet<prypo3.Controllers.RolesViewModel> RolesViewModels { get; set; }
+
         // Добавьте DbSet для каждого типа сущности, который требуется включить в модель. Дополнительные сведения 
         // о настройке и использовании модели Code First см. в статье http://go.microsoft.com/fwlink/?LinkId=390109.
 

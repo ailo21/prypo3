@@ -1,6 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@model prypo3.DataModel.Fant
-
+﻿@model prypo3.DataModel.Fant
 @{
     ViewBag.Title = "Details";
 }
@@ -78,10 +76,9 @@
     </dl>
 </div>
 <p>
-
-    @if (User.Identity.GetUserId() == Model.Author)
-    {
-        Html.ActionLink("Edit", "Edit", new { id = Model.Id });
+    @if (ViewBag.Edit)
+    {        
+        <a href="/fant/edit/@Model.Id">Редактировать</a>
         <span>|</span>
     }
     @Html.ActionLink("Вернуться", "Index")

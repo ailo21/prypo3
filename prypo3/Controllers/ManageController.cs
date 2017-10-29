@@ -7,24 +7,93 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using prypo3.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace prypo3.Controllers
 {
+    public class RolesViewModel
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
+
     [Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
 
         public ManageController()
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            RoleManager = roleManager;
         }
+        [Authorize(Roles = "admin")]
+        public ActionResult Roles()
+        {
+            var roles = RoleManager.Roles.ToList();
+            return View(roles.Select(x=>new RolesViewModel() { Id=x.Id,Name=x.Name}));
+        }
+        [Authorize(Roles = "admin")]
+        public ActionResult CreateRole()
+        {
+            return View();
+        }
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRole(RolesViewModel model)
+        {
+            if(RoleManager.RoleExists(model.Name))
+            {
+                //error
+            }
+            var newRole = new IdentityRole(model    .Name);
+            var result = RoleManager.Create(newRole);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Roles");
+            }
+
+            return View(model);
+        }
+        [Authorize(Roles = "admin")]
+        public ActionResult AddroleToUser()
+        {
+            return View();
+        }
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult AddRoleToUser(string user, string role)
+        {
+            var _user = UserManager.FindByEmail(user);
+            var _role = RoleManager.FindByName(role);
+
+            var result=UserManager.AddToRole(_user.Id, role);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Roles");
+            }
+            ViewBag.Errors = result.Errors;
+            return View();
+        }
+
+
+        public ApplicationRoleManager RoleManager
+        {
+            get {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set {
+                _roleManager = value;
+            }
+         }
 
         public ApplicationSignInManager SignInManager
         {
